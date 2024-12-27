@@ -1,4 +1,4 @@
-import { Elysia, redirect } from 'elysia';
+import { Elysia } from 'elysia';
 import mongoose from 'mongoose';
 import ShortUrlModel from './database/schema';
 import { config } from 'dotenv';
@@ -13,6 +13,7 @@ mongoose.connect(`${process.env.db_URL}`,{
 }).catch((err) => {
   console.error(`Error: ${err}`);
 });
+
 
 interface RequestBody {
   fullUrl: string;
@@ -55,9 +56,15 @@ const app = new Elysia();
       return { error: "Short URL not found" };
     }
     
-    return redirect(shortUrlDoc.fullURL); 
+    return `Here is the searched url:${shortUrlDoc.shortURL}`; 
   })
   
-  .listen(`${PORT}`);
+  .listen(`${PORT}`,()=>{
 
-console.log(`Server running on port: ${PORT}`);
+
+    console.log(`Server running on port:${PORT}`);
+    
+  });
+
+
+

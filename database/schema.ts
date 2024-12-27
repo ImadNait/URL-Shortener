@@ -1,4 +1,5 @@
 import { Document, model, Schema } from "mongoose";
+
 import shortID from "shortid";
 
 interface shortUrl extends Document{
@@ -6,11 +7,13 @@ interface shortUrl extends Document{
     shortURL:string
 }
 
+
 const shortURLSchem = new Schema<shortUrl>({
     fullURL:{
         type:String,
         required:true
     },
+    
     shortURL:{
         type:String,
         required:true,
