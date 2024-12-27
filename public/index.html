@@ -10,7 +10,6 @@
     <title>Url shortener</title>
 </head>
 <body>
-    <div class="main">
         <h1>URL Shortener</h1>
 
         <form action="/shorter" method="post" id="short">
@@ -26,8 +25,6 @@
             <br>
             <button type="submit">Shorten</button>
         </form>
-
-    </div>
     <script>
         document.getElementById("short").addEventListener("submit", async (event) => {
             event.preventDefault();
