@@ -13,9 +13,11 @@ return"short URL"
         url:t.String()
     })
 })
-
 .get("/shorter/:id",({params})=>{
     return "shorten url"
+})
+.get("/short/url",(url)=>{
+    return {url}
 })
 
 
