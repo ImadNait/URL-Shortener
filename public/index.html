@@ -34,6 +34,10 @@
             font-family: "Poppins", serif;
             font-weight: 800;
             font-style: normal;
+
+        }
+        body{
+            display: flex; justify-content: center; align-items: center;
         }
         input {
             border: 1px #282e35 solid;
@@ -70,15 +74,15 @@
         document.getElementById("short").addEventListener("submit", async (event) => {
             event.preventDefault();
             const urlInput = document.getElementById("input").value;
-
+            console.log(urlInput);
             const response = await fetch("http://localhost:4000/shorter", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ fullUrl: urlInput })  // Ensure correct body format
+                body: JSON.stringify({ fullUrl: urlInput }) 
             });
 
             const result = await response.json();
-            document.getElementById("output").value = result.shortURL;  // Correct response handling
+            document.getElementById("output").value = result.shortURL;  
         });
     </script>
 </body>

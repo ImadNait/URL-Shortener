@@ -1,9 +1,12 @@
 import { Elysia, redirect } from 'elysia';
 import mongoose from 'mongoose';
 import ShortUrlModel from './database/schema';
-const PORT = process.env.PORT || 4000;
+import { config } from 'dotenv';
 
-mongoose.connect('mongodb://localhost:27017/URL/url',{ 
+config();
+const PORT = process.env.PORT;
+
+mongoose.connect(`${process.env.db_URL}`,{ 
     autoIndex: true
   }).then(() => {
   console.log("Connected to Mongo Database");
@@ -15,13 +18,13 @@ interface RequestBody {
   fullUrl: string;
 }
 
-const app = new Elysia()
-  .get("/", () => {
+const app = new Elysia();
+  app.get("/", () => {
     return new Response(Bun.file('./public/index.html'))
   })
 
-  .post("/shorter", async ({ body }: { body: RequestBody }) => {  // Type the body here
-    const { fullUrl } = body;  // Now TypeScript knows fullUrl exists
+  .post("/shorter", async ({ body }: { body: RequestBody }) => {  
+    const { fullUrl } = body; 
 
     if (!fullUrl) {
       throw new Error("URL is required!");
@@ -31,8 +34,17 @@ const app = new Elysia()
     await shorturl.save();
     console.log(shorturl.shortURL);
 
-    return { shortURL: `http://localhost:4000/${shorturl.shortURL}` };
+    return { shortURL: `http://shrt.lnk/${shorturl.shortURL}` };
   })
+
+  .get("/all",()=>{
+    const allURLs = ShortUrlModel.find()
+    if(!allURLs){
+    return 'No urls found!'
+    }
+    else{
+    return `All URLs:\n${allURLs}`
+  }})
 
   .get("/:shorturl", async ({ params }) => {
     const { shorturl } = params;
@@ -43,9 +55,9 @@ const app = new Elysia()
       return { error: "Short URL not found" };
     }
     
-    return redirect(shortUrlDoc.fullURL);  // Proper redirection
+    return redirect(shortUrlDoc.fullURL); 
   })
   
-  .listen(PORT);
+  .listen(`${PORT}`);
 
 console.log(`Server running on port: ${PORT}`);

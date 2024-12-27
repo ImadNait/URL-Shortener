@@ -17,6 +17,7 @@
   "dependencies": {
     "@types/mongoose": "^5.11.97",
     "@types/shortid": "^2.2.0",
+    "dotenv": "^16.4.7",
     "elysia": "^1.2.8",
     "mongodb": "^6.12.0",
     "mongoose": "^8.9.2",
