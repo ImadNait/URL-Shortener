@@ -14,6 +14,10 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "elysia": "^1.2.6"
+    "@types/mongoose": "^5.11.97",
+    "@types/shortid": "^2.2.0",
+    "elysia": "^1.2.8",
+    "mongoose": "^8.9.2",
+    "shortid": "^2.2.16"
   }
 }
