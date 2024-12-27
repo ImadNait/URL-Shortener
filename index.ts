@@ -1,4 +1,4 @@
-import { Elysia } from 'elysia';
+import { Elysia, error } from 'elysia';
 import mongoose from 'mongoose';
 import ShortUrlModel from './database/schema';
 import { config } from 'dotenv';
@@ -46,7 +46,15 @@ const app = new Elysia();
     else{
     return `All URLs:\n${allURLs}`
   }})
-
+  .delete("/:shorturl",({ params })=>{
+    const url = params.shorturl
+    const exurl = ShortUrlModel.findOne({ shortURL:url })
+    if(!exurl){
+        throw Error(`url not found`)
+    }else{
+        exurl.deleteOne();
+    }
+  })
   .get("/:shorturl", async ({ params }) => {
     const { shorturl } = params;
 
