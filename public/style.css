@@ -1,0 +1,41 @@
+* {
+    background-color: #1d232a;
+    color: #a6adba;
+    font-family: "Poppins", serif;
+    font-weight: 800;
+    font-style: normal;
+
+}
+body{
+    display: flex; justify-content: center; align-items: center;
+}
+input {
+    border: 1px #282e35 solid;
+    border-radius: 5px;
+    min-width: 200px;
+    min-height: 40px;
+    font-size:larger;
+}
+input:hover {
+    border-color: white;
+    transition: 0.5s ease;
+}
+button {
+    border-radius: 5px;
+    background-color: rgb(76, 109, 180);
+    border: none;
+    min-width: 150px;
+    min-height: 40px;
+    font-size:25px;
+}
+button:hover {
+    background-color: #282e35;  
+    transition: 50ms ease-in;
+}
+.output {
+    display: flex;
+    flex-direction: row;
+}
+.output button {
+    background-color: #282e35;
+}
