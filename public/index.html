@@ -29,7 +29,7 @@
             event.preventDefault();
             const urlInput = document.getElementById("input").value;
             console.log(urlInput);
-            const response = await fetch("http://localhost:4000/shorter", {
+            const response = await fetch("/shorter", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ fullUrl: urlInput }) 
