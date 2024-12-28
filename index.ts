@@ -14,10 +14,10 @@ mongoose.connect(`${process.env.db_URL}`,{
   console.error(`Error: ${err}`);
 });
 
-
 interface RequestBody {
   fullUrl: string;
 }
+
 
 const app = new Elysia();
   app.get("/", () => {
@@ -31,6 +31,7 @@ const app = new Elysia();
       throw new Error("URL is required!");
     }
 
+      
     const shorturl = new ShortUrlModel({ fullURL: fullUrl });
     await shorturl.save();
     console.log(shorturl.shortURL);
