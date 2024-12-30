@@ -1,4 +1,4 @@
-# bun-v2
+# URL-Shortener
 
 To install dependencies:
 
