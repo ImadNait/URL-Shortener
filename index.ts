@@ -39,7 +39,7 @@ const app = new Elysia();
       }
     console.log(shorturl.shortURL);
 
-    return { shortURL: `http://localhost:4000/${shorturl.shortURL}` };
+    return { shortURL: `http://localhost:${PORT}/${shorturl.shortURL}` };
   })
 
 
