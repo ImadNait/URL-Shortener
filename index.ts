@@ -1,4 +1,4 @@
-import { Elysia, error } from 'elysia';
+import { Elysia, error, redirect } from 'elysia';
 import mongoose from 'mongoose';
 import ShortUrlModel from './database/schema';
 import { config } from 'dotenv';
@@ -31,12 +31,17 @@ const app = new Elysia();
       throw new Error("URL is required!");
     }
 
-    const shorturl = new ShortUrlModel({ fullURL: fullUrl });
-    await shorturl.save();
+      
+    let shorturl = await ShortUrlModel.findOne({ fullURL: fullUrl });
+      if(!shorturl){
+        shorturl = new ShortUrlModel({ fullURL: fullUrl });
+        await shorturl.save();
+      }
     console.log(shorturl.shortURL);
 
-    return { shortURL: `http://shrt.lnk/${shorturl.shortURL}` };
+    return { shortURL: `http://localhost:4000/${shorturl.shortURL}` };
   })
+
 
   .get("/all",()=>{
     const allURLs = ShortUrlModel.find()
@@ -63,16 +68,12 @@ const app = new Elysia();
     if (!shortUrlDoc) {
       return { error: "Short URL not found" };
     }
-    
-    return `Here is the searched url:${shortUrlDoc.shortURL}`; 
+    console.log(`URL found: ${shorturl}`);
+    return redirect(shortUrlDoc.fullURL, 301); 
   })
-  
   .listen(`${PORT}`,()=>{
 
 
     console.log(`Server running on port:${PORT}`);
     
   });
-
-
-
